@@ -6,17 +6,17 @@ export const ContextGlobal = createContext();
 export const useContextGlobal = () => useContext(ContextGlobal);
 
 export const ContextProvider = ({ children }) => {
-  const [dentists, setDentists] = useState([]);
+  const [dentistas, setDentist] = useState([]);
 
   useEffect(() => {
     axios
-      .get("https://jsonplaceholder.typicode.com/users")
+      .get("http://localhost:3001/Dentistas")
       .then((res) => res.json())
       .then((data) => console.log(data))
   }, []);
 
   return (
-    <ContextGlobal.Provider value={{ dentists, setDentists }}>
+    <ContextGlobal.Provider value={{ dentistas, setDentist }}>
       {children}
     </ContextGlobal.Provider>
   );
