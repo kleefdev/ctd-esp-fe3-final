@@ -7,18 +7,21 @@ const Navbar = () => {
 
   return (
 
-    <>
+    <> 
+      <nav className='nav'>
 
-    <nav className='nav'>
-        <Link to="/" className="site-title"><h2>DH Odonto</h2></Link>
-        <Link to='/'><h3>Home</h3></Link>  
-        <Link to='/contact'><h3>Contact</h3></Link>  
-        <Link to='/favs'><h3>Favs</h3> </Link>  
-  
+      <Link to="/" className="site-title"><h2>DH Odonto</h2></Link>
 
-      {/* Aqui deberan agregar los liks correspondientes a las rutas definidas */}
-      {/* Deberan implementar ademas la lmenta para cambiar de Theme con el button */}
-      <button>Change theme</button>
+      <ul>  
+          <li><Link to='/'><h3>Home</h3></Link></li>
+          <li><Link to='/contact'><h3>Contact</h3></Link></li>
+          <li><Link to='/favs'><h3>Favs</h3></Link> </li>   
+      </ul>
+
+      <button className="tema-boton">Change theme</button>   
+
+      
+
     </nav>
 
     </>

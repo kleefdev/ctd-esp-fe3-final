@@ -12,6 +12,7 @@ import Detail from "./Routes/Detail";
 function App() {
 
     return (
+        <> 
 
     <div className="App">
         <Navbar/>
@@ -23,6 +24,8 @@ function App() {
         </Routes>
     <Footer/>
     </div>
+
+    </>
 );
 }
 

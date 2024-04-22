@@ -1,25 +1,30 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
-import axios from "axios";
+import React, { useReducer, useMemo, createContext } from "react";
 
-export const ContextGlobal = createContext();
+export const initialState = {theme: "light", data: []}
 
-export const useContextGlobal = () => useContext(ContextGlobal);
+export const ContextGlobal = createContext(initialState);
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'TOGGLE_THEME':
+      return { ...state, theme: state.theme === 'light' ? 'dark' : 'light' };
+    case 'SET_DATA':
+      return { ...state, data: action.payload };
+    default:
+      return state;
+  }
+};
 
 export const ContextProvider = ({ children }) => {
-  const [dentistas, setDentist] = useState([]);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:3001/Dentistas")
-      .then((res) => res.json())
-      .then((data) => console.log(data))
-  }, []);
+  const contextValue = useMemo(() => {
+    return { state, dispatch };
+  }, [state, dispatch]);
 
   return (
-    <ContextGlobal.Provider value={{ dentistas, setDentist }}>
+    <ContextGlobal.Provider value={contextValue}>
       {children}
     </ContextGlobal.Provider>
   );
 };
-
-export default ContextProvider;

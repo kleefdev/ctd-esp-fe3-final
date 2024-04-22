@@ -1,19 +1,41 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Card from '../Components/Card'
-import { useContextGlobal } from '../Components/utils/global.context'
+import axios from 'axios'
+// import { useContextGlobal } from '../Components/utils/global.context'
 
 const Home = () => {
-  const { dentistas, theme } = useContextGlobal()
+
+    const [dentistas, setDentistas] = useState([]);
+
+    useEffect(() => {
+
+      axios.get("http://localhost:3001/Dentistas")
+      .then(response => setDentistas(response.data))
+      .catch(error => console.log(error))
+
+    }, [])
 
   return (
-    <main className={theme}>
-      <h1>Home</h1>
+
+    <> 
+        
+    <main>
+
+        <h1>Home</h1>
+
       <div className='card-grid'>
-        {dentistas.map(dentist => (
-          <Card dentist={dentist} key={dentist.id} />
-        ))}
-      </div>
-    </main>
+        {  
+        dentistas.map((dentista) => {
+            return (
+
+              <Card dentista={dentista} key={dentista.id}/>
+            )
+          })
+        }
+    </div> 
+  </main>
+
+    </>
   )
 }
 

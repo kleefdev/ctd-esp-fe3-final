@@ -1,44 +1,29 @@
-import React, { useContext, useEffect, useState } from 'react';
-// import { ContextGlobal } from '../Components/utils/global.context';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
-
-const Detail = ({ match }) => {
-  const [dentistas, setDentista] = useState(null);
-  const { theme } = useContext();
+const Detail = () => {
+  const { id } = useParams();
+  const [dentista, setDentista] = useState(null);
 
   useEffect(() => {
-    const fetchDentist = async () => {
-      try {
-        const response = await fetch(`https://jsonplaceholder.typicode.com/users/${match.params.id}`);
-        if (!response.ok) {
-          throw new Error('Failed to fetch dentist');
-        }
-        const dentistData = await response.json();
-        setDentista(dentistData);
-      } catch (error) {
-        console.error('Error fetching dentist:', error);
-      }
-    };
-
-    fetchDentist();
-  }, [match.params.id]);
+    fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
+      .then(response => response.json())
+      .then(data => setDentista(data));
+  }, [id]);
 
   return (
-    <div className={`Detail ${theme}`}>
-      <h1>Detail Dentist id {match.params.id}</h1>
-            {dentistas && (
-              <div>
-                <div className="card">
-                  <img src="./images/doctor.jpg" alt="Dentist" />
-                  <h2>{dentistas.name}</h2>
-                  <h3>{dentistas.email}</h3>
-                  <h3>{dentistas.phone}</h3>
-                  <h3>{dentistas.website}</h3>
-                </div>
-              </div>
-            )}
-          </div>
-        );
-      };
+    <>
+      <h1>Detail Dentist id {id}</h1>
+      {dentista && (
+        <div>
+          <p>Name: {dentista.name}</p>
+          <p>Email: {dentista.email}</p>
+          <p>Phone: {dentista.phone}</p>
+          <p>Website: {dentista.website}</p>
+        </div>
+      )}
+    </>
+  )
+}
 
 export default Detail;
