@@ -1,4 +1,5 @@
 import React, { useReducer, useMemo, createContext } from "react";
+import "../../index.css";
 
 export const initialState = {theme: "light", data: []}
 
@@ -14,6 +15,8 @@ const reducer = (state, action) => {
       return state;
   }
 };
+
+
 
 export const ContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);

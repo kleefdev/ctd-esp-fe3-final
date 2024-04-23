@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from 'react-router-dom';
 
 const Card = ({ dentista }) => {
   const [favs, setFavs] = useState(() => {
@@ -13,13 +14,19 @@ const Card = ({ dentista }) => {
   }
 
   return (
+    <> 
+   
+    <Link to={`/detail/${dentista.id}`}> 
     <div className="card">
       <img className="card-img" src="./images/doctor.jpg" alt="DH Logo" />
-      <h2>{dentista.name}</h2>
-      <h3>{dentista.username}</h3>
-      <h3>{dentista.id}</h3>
+      <p>{dentista.name}</p>
+      <p>{dentista.username}</p>
+      <p>{dentista.id}</p>
       <button onClick={addFav} className="favButton">Add fav</button>
     </div>
+    </Link>
+
+    </>
   );
 }
 

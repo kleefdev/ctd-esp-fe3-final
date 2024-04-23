@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 
 const Form = () => {
@@ -33,6 +34,7 @@ const Form = () => {
     event.preventDefault();
     if (!errors.name && !errors.email) {
       console.log(form);
+      window.alert(`Hola ${form.name}, Te contactaremos cuando antes vía mail`);
     }
   };
 
